@@ -5,7 +5,14 @@
         "body-parser": "^1.18.2",
         "ejs": "^2.5.7",
         "express": "^4.16.2",
+        "express-graphql": "^0.6.12",
         "express-session": "^1.15.6",
-        "fs": "0.0.1-security"
+        "fs": "0.0.1-security",
+        "geojson-stats": "0.0.2",
+        "graphql": "^0.13.1",
+        "jsdom": "^11.6.2",
+        "mongodb": "^3.0.2",
+        "togeojson": "^0.16.0",
+        "vue": "^2.5.13"
     }
 }

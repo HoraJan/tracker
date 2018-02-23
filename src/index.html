@@ -12,11 +12,91 @@
     <link rel="stylesheet" href="src/main.css" />
     <link rel="stylesheet" href="src/leaflet.css" />
     <script src="src/leaflet.js"></script>
+    <script src="src/vue.min.js"></script>
+
 </head>
 
 <body>
     <div id="mapid" class="map"></div>
+    <div id="app">
+        <div class="filter">
+            <button v-for="type in types" v-on:click="setFilter('type', type)" v-bind:class="{ clicked: filter.type===type }">{{type}}</button>
+            <button v-for="year in years" v-on:click="setFilter('year', year)" v-bind:class="{ clicked: filter.year===year }">{{year}}</button>
+        </div>
+        <div class="app">
+            <button v-for="track in tracks" v-on:click="getTrack(track._id)"> {{ track.name }} </button>
+        </div>
+    </div>
     <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                filter: {},
+                track: null,
+                tracks: [],
+                types: [],
+                years: []
+            },
+            methods: {
+                setFilter: function (filter, type) {
+                    if (this._data.filter[filter] === type) {
+                        this._data.filter[filter] = undefined;
+                    } else {
+                        this._data.filter[filter] = type;
+                    }
+                    console.log(type);
+                    this.getTracks();
+                },
+                getTracks: function () {
+                    let myInit = {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'default',
+                    };
+                    let myRequest = new Request('http://localhost:3000/graphql?query={tracks' + (this.getFilterString()) + '{name, _id}, types, years }', myInit);
+                    fetch(myRequest).then(function (response) {
+                        return response.json();
+                    }).then(responseJson => {
+                        console.log(responseJson);
+                        this._data.tracks = responseJson.data.tracks;
+                        this._data.types = responseJson.data.types;
+                        this._data.years = responseJson.data.years;
+                    }).catch(error => console.log(error));
+                },
+                getTrack: function (id) {
+                    let myInit = {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'default',
+                    };
+                    let myRequest = new Request('http://localhost:3000/graphql?query={track(_id:"' + id + '"){data}}', myInit);
+                    fetch(myRequest).then(function (response) {
+                        return response.json();
+                    }).then(responseJson => {
+                        console.log(responseJson);
+                        if (this._data.track) mymap.removeLayer(this._data.track);
+                        this._data.track = L.geoJSON(JSON.parse(responseJson.data.track.data)).addTo(mymap);
+                        mymap.fitBounds(this._data.track.getBounds());
+                    }).catch(error => console.log(error));
+                },
+                getFilterString: function () {
+                    let string = '';
+                    let conString = '';
+                    for (type in this.filter) {
+                        if (this.filter[type]) {
+                            conString += type + ':"' + this.filter[type] + '",';
+                        }
+                    }
+                    if (conString) {
+                        string = '(' + conString.slice(0, -1) + ')';
+                    }
+                    console.log(string);
+                    return string;
+                }
+            }
+        });
+        app.getTracks();
+
         var mymap = L.map('mapid').setView([50, 15], 8);
         L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             maxZoom: 17,

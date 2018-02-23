@@ -1,5 +1,17 @@
-var Router = function(app) {
-    app.get('/', function(req, res) {
+var Router = function (app) {
+
+    const fs = require('fs');
+    const { buildSchema } = require('graphql');
+    const graphqlHTTP = require('express-graphql');
+    // const DOMParser = require('xmldom').DOMParser;
+    // const togeojson = require('togeojson');
+    // var Mongo = require('./mongo.js');
+    // let mongo = new Mongo();
+
+    const GraphQL = require('./graphql.js');
+    let graphql = new GraphQL();
+
+    app.get('/', function (req, res) {
         var sess = req.session;
         if (!sess.counter) {
             sess.counter = 1;
@@ -10,10 +22,46 @@ var Router = function(app) {
         }
     });
 
-    app.get('/src/*', function(req, res) {
-        var fs = require('fs');
+    // app.get('/save-to-mongo', function (req, res) {
+    //     fs.readdir('./new/', (err, files) => {
+    //         if (err) { reject(err); }
+    //         else {
+    //             let promiseArr = files.map((name) => {
+    //                 return new Promise(function(resolve, reject) {
+    //                     fs.readFile(__dirname + '/new/' + name, function (err, data) {
+    //                         if (err) {
+    //                             reject(err);
+    //                         } else {
+    //                             var gpx = new DOMParser().parseFromString(data.toString());
+    //                             let convert = togeojson.gpx(gpx);
+    //                             console.log(data.length, JSON.stringify(convert).length);
+    //                             resolve({name: name, type: name.split('-')[2].split('.')[0], data: convert.features});
+    //                         }
+    //                     });
+    //                 });
+    //             });
+    //             Promise.all(promiseArr)
+    //             .then((geojsons) => {
+    //                 mongo.insertMany(geojsons, 'tracks');
+    //                 res.send(geojsons);
+    //             })
+    //             .catch((err) => console.log(err));
+    //         }
+    //     });
+    //     // mongo.insertMany();
+    // });
+
+
+
+    app.use('/graphql', graphqlHTTP({
+        schema: graphql.schema,
+        rootValue: graphql.root,
+        graphiql: false //Set to false if you don't want graphiql enabled
+    }));
+
+    app.get('/src/*', function (req, res) {
         var fileName = req.originalUrl;
-        fs.readFile(__dirname + req.originalUrl, function(err, data) {
+        fs.readFile(__dirname + req.originalUrl, function (err, data) {
             if (typeof data === 'undefined') {
                 res.status(404);
                 console.log(fileName + " not found");
