@@ -3,8 +3,10 @@ const graphqlHTTP = require('express-graphql');
 const fs = require('fs');
 const DOMParser = require('xmldom').DOMParser;
 const togeojson = require('togeojson');
-var Mongo = require('./mongo.js');
-let mongo = new Mongo();
+const Mongo = require('./mongo.js');
+const mongo = new Mongo();
+const Route = require('./route.js');
+
 
 let GraphQL = function () { };
 
@@ -19,8 +21,17 @@ GraphQL.prototype.schema = buildSchema(`
     type Track {
         name: String,
         _id: String,
-        data: String,
-        type: String
+        data: GeoJSON,
+        type: String,
+        length: Float
+    },
+    type GeoJSON {
+        type: String,
+        geometry: Geometry
+    },
+    type Geometry {
+        type: String,
+        coordinates: [[Float]]
     }
   `);
 
@@ -29,21 +40,16 @@ GraphQL.prototype.root = {
         return 'world';
     },
     track: (args) => {
-        console.log(args);
         return new Promise(function (resolve, reject) {
             mongo.find({ "_id": mongo.ObjectId(args._id) }, 'tracks')
-                .then((resp) => { resolve({ name: resp[0].name, _id: resp[0]._id, data: JSON.stringify(resp[0].data[0]) }); })
-                .catch((err) => { reject(err) });
+                .then((resp) => { resolve({ name: resp[0].name, _id: resp[0]._id, data: resp[0].data[0], length: new Route(resp[0].data[0]).getLength() });})
+                .catch((err) => { console.log(err); reject(err) });
         });
     },
-    tracks: (args) => {
+    tracks: (filters) => {
         return new Promise(function (resolve, reject) {
-            let match = {};
-            if (args) {
-                match = args;
-            }
-            mongo.aggregate([{ "$match": match }, { "$project": { "name": 1 } }], 'tracks')
-                .then((resp) => { resolve(resp.map((el) => { return { name: el.name, _id: el._id } })); })
+            mongo.aggregate([{ "$match": filters }, { "$project": { "name": 1, "type": 1 } }], 'tracks')
+                .then((resp) => { resolve(resp.map((el) => { return { name: el.name, _id: el._id, type: el.type, data: {type:"Possible only to specific id!"} } })); })
                 .catch((err) => { reject(err); });
         });
     },
@@ -57,8 +63,8 @@ GraphQL.prototype.root = {
     years: () => {
         return new Promise(function (resolve, reject) {
             mongo.distinct("year", 'tracks')
-            .then((resp) => { resolve(resp); })
-            .catch((err) => { reject(err); });
+                .then((resp) => { resolve(resp); })
+                .catch((err) => { reject(err); });
         });
     }
 };

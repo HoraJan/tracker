@@ -53,7 +53,7 @@ var Router = function (app) {
 
 
 
-    app.use('/graphql', graphqlHTTP({
+    app.get('/graphql', graphqlHTTP({
         schema: graphql.schema,
         rootValue: graphql.root,
         graphiql: false //Set to false if you don't want graphiql enabled

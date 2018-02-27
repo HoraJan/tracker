@@ -53,7 +53,7 @@
                         mode: 'cors',
                         cache: 'default',
                     };
-                    let myRequest = new Request('http://localhost:3000/graphql?query={tracks' + (this.getFilterString()) + '{name, _id}, types, years }', myInit);
+                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTracks($year:String,$type:String){tracks(type:$type,year:$year){name, _id}, types, years }&variables='+JSON.stringify(this.filter), myInit);
                     fetch(myRequest).then(function (response) {
                         return response.json();
                     }).then(responseJson => {
@@ -69,29 +69,15 @@
                         mode: 'cors',
                         cache: 'default',
                     };
-                    let myRequest = new Request('http://localhost:3000/graphql?query={track(_id:"' + id + '"){data}}', myInit);
+                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTrack($id:String!){track(_id:$id){data{type,geometry{type,coordinates}}}}&variables='+JSON.stringify({id: id}), myInit);
                     fetch(myRequest).then(function (response) {
                         return response.json();
                     }).then(responseJson => {
-                        console.log(responseJson);
+                        console.log(responseJson.data.track.data);
                         if (this._data.track) mymap.removeLayer(this._data.track);
-                        this._data.track = L.geoJSON(JSON.parse(responseJson.data.track.data)).addTo(mymap);
+                        this._data.track = L.geoJSON(responseJson.data.track.data).addTo(mymap);
                         mymap.fitBounds(this._data.track.getBounds());
                     }).catch(error => console.log(error));
-                },
-                getFilterString: function () {
-                    let string = '';
-                    let conString = '';
-                    for (type in this.filter) {
-                        if (this.filter[type]) {
-                            conString += type + ':"' + this.filter[type] + '",';
-                        }
-                    }
-                    if (conString) {
-                        string = '(' + conString.slice(0, -1) + ')';
-                    }
-                    console.log(string);
-                    return string;
                 }
             }
         });
