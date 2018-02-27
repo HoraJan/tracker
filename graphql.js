@@ -21,7 +21,7 @@ GraphQL.prototype.schema = buildSchema(`
     type Track {
         name: String,
         _id: String,
-        data: GeoJSON,
+        geojson: GeoJSON,
         type: String,
         length: Float
     },
@@ -35,21 +35,21 @@ GraphQL.prototype.schema = buildSchema(`
     }
   `);
 
-GraphQL.prototype.root = {
+GraphQL.prototype.getters = {
     hello: () => {
         return 'world';
     },
     track: (args) => {
         return new Promise(function (resolve, reject) {
             mongo.find({ "_id": mongo.ObjectId(args._id) }, 'tracks')
-                .then((resp) => { resolve({ name: resp[0].name, _id: resp[0]._id, data: resp[0].data[0], length: new Route(resp[0].data[0]).getLength() });})
+                .then((resp) => { resolve({ type: resp[0].type, name: resp[0].name, _id: resp[0]._id, geojson: resp[0].data[0], length: new Route(resp[0].data[0]).getLength() });})
                 .catch((err) => { console.log(err); reject(err) });
         });
     },
     tracks: (filters) => {
         return new Promise(function (resolve, reject) {
             mongo.aggregate([{ "$match": filters }, { "$project": { "name": 1, "type": 1 } }], 'tracks')
-                .then((resp) => { resolve(resp.map((el) => { return { name: el.name, _id: el._id, type: el.type, data: {type:"Possible only to specific id!"} } })); })
+                .then((resp) => { resolve(resp.map((el) => { return { name: el.name, _id: el._id, type: el.type, geojson: {type:"Possible only to specific id!"} } })); })
                 .catch((err) => { reject(err); });
         });
     },

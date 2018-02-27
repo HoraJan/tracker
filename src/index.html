@@ -21,6 +21,7 @@
     <div id="app">
         <div class="filter">
             <button v-for="type in types" v-on:click="setFilter('type', type)" v-bind:class="{ clicked: filter.type===type }">{{type}}</button>
+            <br />
             <button v-for="year in years" v-on:click="setFilter('year', year)" v-bind:class="{ clicked: filter.year===year }">{{year}}</button>
         </div>
         <div class="app">
@@ -69,13 +70,13 @@
                         mode: 'cors',
                         cache: 'default',
                     };
-                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTrack($id:String!){track(_id:$id){data{type,geometry{type,coordinates}}}}&variables='+JSON.stringify({id: id}), myInit);
+                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTrack($id:String!){track(_id:$id){geojson{type,geometry{type,coordinates}}}}&variables='+JSON.stringify({id: id}), myInit);
                     fetch(myRequest).then(function (response) {
                         return response.json();
                     }).then(responseJson => {
-                        console.log(responseJson.data.track.data);
+                        console.log(responseJson.data.track.geojson);
                         if (this._data.track) mymap.removeLayer(this._data.track);
-                        this._data.track = L.geoJSON(responseJson.data.track.data).addTo(mymap);
+                        this._data.track = L.geoJSON(responseJson.data.track.geojson).addTo(mymap);
                         mymap.fitBounds(this._data.track.getBounds());
                     }).catch(error => console.log(error));
                 }
@@ -83,7 +84,7 @@
         });
         app.getTracks();
 
-        var mymap = L.map('mapid').setView([50, 15], 8);
+        let mymap = L.map('mapid').setView([50, 15], 8);
         L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             maxZoom: 17,
         }).addTo(mymap);
