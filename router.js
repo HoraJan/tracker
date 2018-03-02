@@ -1,7 +1,6 @@
 var Router = function (app) {
 
     const fs = require('fs');
-    const { buildSchema } = require('graphql');
     const graphqlHTTP = require('express-graphql');
     const GraphQL = require('./graphql.js');
     let graphql = new GraphQL();

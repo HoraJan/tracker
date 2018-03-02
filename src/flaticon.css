@@ -1,0 +1,391 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        /*font-size: 20px;*/
+font-style: normal;
+/*margin-left: 20px;*/
+}.flaticon-award54:before {
+	content: "\e000";
+}
+.flaticon-bars18:before {
+	content: "\e001";
+}
+.flaticon-bars42:before {
+	content: "\e002";
+}
+.flaticon-bicycle2:before {
+	content: "\e003";
+}
+.flaticon-bicycle24:before {
+	content: "\e004";
+}
+.flaticon-bicycle3:before {
+	content: "\e005";
+}
+.flaticon-business67:before {
+	content: "\e006";
+}
+.flaticon-checkered12:before {
+	content: "\e007";
+}
+.flaticon-chronometer26:before {
+	content: "\e008";
+}
+.flaticon-chronometer6:before {
+	content: "\e009";
+}
+.flaticon-climbing4:before {
+	content: "\e00a";
+}
+.flaticon-climbing5:before {
+	content: "\e00b";
+}
+.flaticon-climbing8:before {
+	content: "\e00c";
+}
+.flaticon-cloud-storage:before {
+	content: "\e00d";
+}
+.flaticon-cloud25:before {
+	content: "\e00e";
+}
+.flaticon-cloud275:before {
+	content: "\e00f";
+}
+.flaticon-cloud31:before {
+	content: "\e010";
+}
+.flaticon-cloud310:before {
+	content: "\e011";
+}
+.flaticon-cloud312:before {
+	content: "\e012";
+}
+.flaticon-cloud316:before {
+	content: "\e013";
+}
+.flaticon-cloud329:before {
+	content: "\e014";
+}
+.flaticon-cloud40:before {
+	content: "\e015";
+}
+.flaticon-cloud409:before {
+	content: "\e016";
+}
+.flaticon-cloud413:before {
+	content: "\e017";
+}
+.flaticon-cloud63:before {
+	content: "\e018";
+}
+.flaticon-cloud71:before {
+	content: "\e019";
+}
+.flaticon-cloud76:before {
+	content: "\e01a";
+}
+.flaticon-clouds11:before {
+	content: "\e01b";
+}
+.flaticon-clouds2:before {
+	content: "\e01c";
+}
+.flaticon-clouds24:before {
+	content: "\e01d";
+}
+.flaticon-clouds25:before {
+	content: "\e01e";
+}
+.flaticon-clouds39:before {
+	content: "\e01f";
+}
+.flaticon-clouds42:before {
+	content: "\e020";
+}
+.flaticon-clouds51:before {
+	content: "\e021";
+}
+.flaticon-clouds52:before {
+	content: "\e022";
+}
+.flaticon-clouds64:before {
+	content: "\e023";
+}
+.flaticon-cloudy19:before {
+	content: "\e024";
+}
+.flaticon-cloudy3:before {
+	content: "\e025";
+}
+.flaticon-cloudy45:before {
+	content: "\e026";
+}
+.flaticon-cloudy46:before {
+	content: "\e027";
+}
+.flaticon-cloudy6:before {
+	content: "\e028";
+}
+.flaticon-cloudy77:before {
+	content: "\e029";
+}
+.flaticon-cloudy78:before {
+	content: "\e02a";
+}
+.flaticon-cloudy79:before {
+	content: "\e02b";
+}
+.flaticon-cycling:before {
+	content: "\e02c";
+}
+.flaticon-Ride:before {
+	content: "\e02d";
+}
+.flaticon-cycling5:before {
+	content: "\e02e";
+}
+.flaticon-dirt:before {
+	content: "\e02f";
+}
+.flaticon-distance1:before {
+	content: "\e030";
+}
+.flaticon-drop23:before {
+	content: "\e031";
+}
+.flaticon-event8:before {
+	content: "\e032";
+}
+.flaticon-first33:before {
+	content: "\e033";
+}
+.flaticon-fog21:before {
+	content: "\e034";
+}
+.flaticon-food74:before {
+	content: "\e035";
+}
+.flaticon-football78:before {
+	content: "\e036";
+}
+.flaticon-graphic74:before {
+	content: "\e037";
+}
+.flaticon-heart10:before {
+	content: "\e038";
+}
+.flaticon-heart288:before {
+	content: "\e039";
+}
+.flaticon-hiking1:before {
+	content: "\e03a";
+}
+.flaticon-ice-flakes:before {
+	content: "\e03b";
+}
+.flaticon-landscape10:before {
+	content: "\e03c";
+}
+.flaticon-leaves3:before {
+	content: "\e03d";
+}
+.flaticon-man-silhouette1:before {
+	content: "\e03e";
+}
+.flaticon-man168:before {
+	content: "\e03f";
+}
+.flaticon-man429:before {
+	content: "\e040";
+}
+.flaticon-man459:before {
+	content: "\e041";
+}
+.flaticon-moon12:before {
+	content: "\e042";
+}
+.flaticon-moon171:before {
+	content: "\e043";
+}
+.flaticon-motorbike18:before {
+	content: "\e044";
+}
+.flaticon-motoring1:before {
+	content: "\e045";
+}
+.flaticon-mountain1:before {
+	content: "\e046";
+}
+.flaticon-mountain32:before {
+	content: "\e047";
+}
+.flaticon-mountain45:before {
+	content: "\e048";
+}
+.flaticon-paralympic18:before {
+	content: "\e049";
+}
+.flaticon-peaks:before {
+	content: "\e04a";
+}
+.flaticon-person242:before {
+	content: "\e04b";
+}
+.flaticon-prize3:before {
+	content: "\e04c";
+}
+.flaticon-rain20:before {
+	content: "\e04d";
+}
+.flaticon-rain33:before {
+	content: "\e04e";
+}
+.flaticon-rain53:before {
+	content: "\e04f";
+}
+.flaticon-rain80:before {
+	content: "\e050";
+}
+.flaticon-raindrop2:before {
+	content: "\e051";
+}
+.flaticon-raindrops2:before {
+	content: "\e052";
+}
+.flaticon-rainy:before {
+	content: "\e053";
+}
+.flaticon-recognition6:before {
+	content: "\e054";
+}
+.flaticon-rising9:before {
+	content: "\e055";
+}
+.flaticon-runer:before {
+	content: "\e056";
+}
+.flaticon-scale23:before {
+	content: "\e057";
+}
+.flaticon-signal7:before {
+	content: "\e058";
+}
+.flaticon-NordicSki:before {
+	content: "\e059";
+}
+.flaticon-ski9:before {
+	content: "\e05a";
+}
+.flaticon-skier:before {
+	content: "\e05b";
+}
+.flaticon-sky11:before {
+	content: "\e05c";
+}
+.flaticon-sky9:before {
+	content: "\e05d";
+}
+.flaticon-snow29:before {
+	content: "\e05e";
+}
+.flaticon-snowflakes12:before {
+	content: "\e05f";
+}
+.flaticon-speed11:before {
+	content: "\e060";
+}
+.flaticon-speed13:before {
+	content: "\e061";
+}
+.flaticon-sport17:before {
+	content: "\e062";
+}
+.flaticon-AlpineSki:before {
+	content: "\e063";
+}
+.flaticon-sprint:before {
+	content: "\e064";
+}
+.flaticon-stairs6:before {
+	content: "\e065";
+}
+.flaticon-stick-man1:before {
+	content: "\e066";
+}
+.flaticon-Run:before {
+	content: "\e067";
+}
+.flaticon-storms:before {
+	content: "\e068";
+}
+.flaticon-sunbeam:before {
+	content: "\e069";
+}
+.flaticon-sun113:before {
+	content: "\e06a";
+}
+.flaticon-sun117:before {
+	content: "\e06b";
+}
+.flaticon-sun79:before {
+	content: "\e06c";
+}
+.flaticon-sunny:before {
+	content: "\e06d";
+}
+.flaticon-sunny18:before {
+	content: "\e06e";
+}
+.flaticon-sunny35:before {
+	content: "\e06f";
+}
+.flaticon-tachometer1:before {
+	content: "\e070";
+}
+.flaticon-thermometer57:before {
+	content: "\e071";
+}
+.flaticon-time21:before {
+	content: "\e072";
+}
+.flaticon-trophy42:before {
+	content: "\e073";
+}
+.flaticon-trophy53:before {
+	content: "\e074";
+}
+.flaticon-trophy75:before {
+	content: "\e075";
+}
+.flaticon-Hike:before {
+	content: "\e076";
+}
+.flaticon-water111:before {
+	content: "\e077";
+}
+.flaticon-water16:before {
+	content: "\e078";
+}
+.flaticon-water35:before {
+	content: "\e079";
+}
+.flaticon-wheat10:before {
+	content: "\e07a";
+}
+.flaticon-wind25:before {
+	content: "\e07b";
+}
+.flaticon-winter35:before {
+	content: "\e07c";
+}

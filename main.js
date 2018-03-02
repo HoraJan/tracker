@@ -1,17 +1,18 @@
-var express = require('express');
-var session = require('express-session');
-var bodyParser = require('body-parser');
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
 
-var app = express();
+const app = express();
 app.use(session({ secret: 'hrozne-moc-dlouhy-heslo-pro-soukromou-session', resave: true, saveUninitialized: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var router = require('./router.js')(app);
+const router = require('./router.js')(app);
 
 app.set('views', __dirname + '/src');
 app.engine('html', require('ejs').renderFile);
 
-var server = app.listen(3000, function() {
+const port = process.env.NODE_PORT || 3000;
+const server = app.listen(port, function() {
     console.log("Tracker is started on port 3000");
 });

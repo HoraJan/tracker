@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="src/main.css" />
     <link rel="stylesheet" href="src/leaflet.css" />
+    <link rel="stylesheet" href="src/flaticon.css" />
     <script src="src/leaflet.js"></script>
     <script src="src/vue.min.js"></script>
 
@@ -20,12 +21,13 @@
     <div id="mapid" class="map"></div>
     <div id="app">
         <div class="filter">
-            <button v-for="type in types" v-on:click="setFilter('type', type)" v-bind:class="{ clicked: filter.type===type }">{{type}}</button>
+            <button :class="['flaticon-'+type+' '+(filter.type===type?'clicked':'')]" v-for="type in types" v-on:click="setFilter('type', type)">{{type}}</button>
             <br />
             <button v-for="year in years" v-on:click="setFilter('year', year)" v-bind:class="{ clicked: filter.year===year }">{{year}}</button>
         </div>
         <div class="app">
-            <button v-for="track in tracks" v-on:click="getTrack(track._id)"> {{ track.name }} </button>
+            <button :class="['flaticon-'+track.name.split('-')[2].split('.')[0]]" v-for="track in tracks" v-on:click="getTrack(track._id)">
+                {{ new Date(Date.UTC(parseInt(track.name.slice(0,4)), parseInt(track.name.slice(4,6))-1, parseInt(track.name.slice(6,8)))).toDateString() }} - {{Math.round(track.length/1000,1)}} </button>
         </div>
     </div>
     <script>
@@ -54,7 +56,7 @@
                         mode: 'cors',
                         cache: 'default',
                     };
-                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTracks($year:String,$type:String){tracks(type:$type,year:$year){name, _id}, types, years }&variables='+JSON.stringify(this.filter), myInit);
+                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTracks($year:String,$type:String){tracks(type:$type,year:$year){name, _id, length}, types, years }&variables=' + JSON.stringify(this.filter), myInit);
                     fetch(myRequest).then(function (response) {
                         return response.json();
                     }).then(responseJson => {
@@ -70,7 +72,7 @@
                         mode: 'cors',
                         cache: 'default',
                     };
-                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTrack($id:String!){track(_id:$id){geojson{type,geometry{type,coordinates}}}}&variables='+JSON.stringify({id: id}), myInit);
+                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTrack($id:String!){track(_id:$id){geojson{type,geometry{type,coordinates}}}}&variables=' + JSON.stringify({ id: id }), myInit);
                     fetch(myRequest).then(function (response) {
                         return response.json();
                     }).then(responseJson => {
