@@ -16,8 +16,8 @@ RUN npm install pm2 -g
 # Bundle app source
 COPY . .
 
-ENV NODE_PORT 3000
-EXPOSE 3000
+ENV NODE_PORT 8000
+EXPOSE 8000
 CMD ["pm2", "start", "main.js", "--no-daemon"]
 
 

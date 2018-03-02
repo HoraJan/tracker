@@ -56,7 +56,7 @@
                         mode: 'cors',
                         cache: 'default',
                     };
-                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTracks($year:String,$type:String){tracks(type:$type,year:$year){name, _id, length}, types, years }&variables=' + JSON.stringify(this.filter), myInit);
+                    let myRequest = new Request('/graphql?query=query%20getTracks($year:String,$type:String){tracks(type:$type,year:$year){name, _id, length}, types, years }&variables=' + JSON.stringify(this.filter), myInit);
                     fetch(myRequest).then(function (response) {
                         return response.json();
                     }).then(responseJson => {
@@ -72,7 +72,7 @@
                         mode: 'cors',
                         cache: 'default',
                     };
-                    let myRequest = new Request('http://localhost:3000/graphql?query=query%20getTrack($id:String!){track(_id:$id){geojson{type,geometry{type,coordinates}}}}&variables=' + JSON.stringify({ id: id }), myInit);
+                    let myRequest = new Request('/graphql?query=query%20getTrack($id:String!){track(_id:$id){geojson{type,geometry{type,coordinates}}}}&variables=' + JSON.stringify({ id: id }), myInit);
                     fetch(myRequest).then(function (response) {
                         return response.json();
                     }).then(responseJson => {
